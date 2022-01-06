@@ -4,8 +4,8 @@ title: About Me
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+Hi there, thanks for dropping by!
 
+I am first year Masters student in Computer Science at New York University, Courant. I completed my Bachelors in Information & Communication Technology from DAIICT.
 
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+It seems that majority of the posts would be centered around math or computer science, which is why I chose fastpages to build my blog on (Kudos to the fastpages team). However, I like to get familiar with sports, MELA, history and economics as well. I want to read about them more and I am looking forward to a write about them from myself.
