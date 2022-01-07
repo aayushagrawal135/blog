@@ -232,13 +232,53 @@ $$x^T y = 0$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Singular-Value-Decomposition">Singular Value Decomposition<a class="anchor-link" href="#Singular-Value-Decomposition"> </a></h2>
+<p>Let $V = [\vec{V_1}, \vec{V_2}, \cdots , \vec{V_n}]$ be the $n$ eigen vectors of a matrix $A$. Also, let $\lambda_1, \lambda_2, \cdots , \lambda_n$ be the $n$ eigenvalues.</p>
+<p>{% raw %}
+$$V = [\vec{V_1}, \vec{V_2}, \cdots , \vec{V_n}]$$
+{% endraw %}</p>
+<p>Multiplying  by matrix $A$,
+{% raw %}
+$$\therefore A V = A [\vec{V_1}, \vec{V_2}, \cdots , \vec{V_n}]$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\therefore A V = [A\vec{V_1}, A\vec{V_2}, \cdots , A\vec{V_n}]$$
+{% endraw %}</p>
+<p>Using eigenvector's property $A \vec{V_i} = \lambda_i \vec{V_i}$,
+{% raw %}
+$$\therefore A V = [\lambda_1 V_1, \lambda_2 V_2, \cdots , \lambda_n V_n]$$
+{% endraw %}</p>
+$$\therefore A V = [V_1, V_2, \cdots , V_n] \cdot 
+\begin{bmatrix}
+    \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\
+    0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\
+    \vdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+    0 &amp; 0 &amp; 0 &amp; \lambda_n
+\end{bmatrix}
+$$<p>{% raw %}
+$$\therefore A V = V \text{ } diag(\lambda)$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\therefore A V V^{-1} = V \text{ } diag(\lambda) \text{ } V^{-1}$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\therefore A = V \text{ } diag(\lambda) \text{ } V^{-1}$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Spectral-norm">Spectral norm<a class="anchor-link" href="#Spectral-norm"> </a></h2>
+<h3 id="Eigen-decomposition-of-symmetric-matrices">Eigen decomposition of symmetric matrices<a class="anchor-link" href="#Eigen-decomposition-of-symmetric-matrices"> </a></h3><p>From the discussion above, we know that eigenvectors of symmestric matrices are orthogonal. We also discussed that for an orthogonal matrix $V$, $V V^{T} = I$, that is $V^{-1} = V^{T}$.</p>
+<p>Continuing the above equation of eigen decomposition we have,
+{% raw %}
+$$A = V \text{ } diag(\lambda) \text{ } V^{-1}$$
+{% endraw %}</p>
+<p>When $A$ is symmetric, its eigenvectors $V$ are orthogonal,
+{% raw %}
+$$\therefore A = V \text{ } diag(\lambda) \text{ } V^{T}$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
