@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Bayesian Approach | Purple Patch</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Bayesian Approach" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I had enrolled in the Machine Learning course in my Masters. Following is my attempt to document a lecture as I understand about all things Bayesian." />
+<meta property="og:description" content="I had enrolled in the Machine Learning course in my Masters. Following is my attempt to document a lecture as I understand about all things Bayesian." />
+<link rel="canonical" href="https://aayushagrawal135.github.io/blog/2022/04/03/Bayesian.html" />
+<meta property="og:url" content="https://aayushagrawal135.github.io/blog/2022/04/03/Bayesian.html" />
+<meta property="og:site_name" content="Purple Patch" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-03T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bayesian Approach" />
+<script type="application/ld+json">
+{"url":"https://aayushagrawal135.github.io/blog/2022/04/03/Bayesian.html","@type":"BlogPosting","headline":"Bayesian Approach","dateModified":"2022-04-03T00:00:00-05:00","datePublished":"2022-04-03T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://aayushagrawal135.github.io/blog/2022/04/03/Bayesian.html"},"description":"I had enrolled in the Machine Learning course in my Masters. Following is my attempt to document a lecture as I understand about all things Bayesian.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://aayushagrawal135.github.io/blog/feed.xml" title="Purple Patch" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Purple Patch</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/cv/">CV</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Bayesian Approach</h1><p class="page-description">I had enrolled in the <a href='https://rajeshhr.github.io/ml-2022/'>Machine Learning</a> course in my Masters. Following is my attempt to document a lecture as I understand about all things Bayesian.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-03T00:00:00-05:00" itemprop="datePublished">
+        Apr 3, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/aayushagrawal135/blog/tree/master/_notebooks/2022-04-03-Bayesian.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/aayushagrawal135/blog/master?filepath=_notebooks%2F2022-04-03-Bayesian.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/aayushagrawal135/blog/blob/master/_notebooks/2022-04-03-Bayesian.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Faayushagrawal135%2Fblog%2Fblob%2Fmaster%2F_notebooks%2F2022-04-03-Bayesian.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-04-03-Bayesian.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Key-Ideas">Key Ideas<a class="anchor-link" href="#Key-Ideas"> </a></h2><ul>
+<li><p><strong>Prior: $p(\theta)$</strong></p>
+<p>$\theta$ is representative of all the paramaters in the model. This prior distribution signifies the state of the parameters before the training begun.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Likelihood: $p(y | \theta, x)$</strong></p>
+<p>$y$ is an output for the corresponding given input $x$. This phase is similar to training the model where we are predicting the $y$, when we have the train data $x$ and the prior $\theta$ parameters.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Posterior: $p(\theta | x, y)$</strong></p>
+<p>Once the training is complete, the parameters of the model must have been tuned, given the pair of train data $x$ and $y$.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Posterior-is-proportional-to-joint">Posterior is proportional to joint<a class="anchor-link" href="#Posterior-is-proportional-to-joint"> </a></h2><!-- $$
+\begin{aligned}
+p(\theta \mid x, y) &= \frac{p(\theta, x, y)}{p(x, y)} \\
+&= \frac{p(x) \text{ } p(\theta, x, y)}{p(x) \text{ } p(x, y)} \\
+&=  \frac{p(\theta, y \mid x)}{p(y \mid x)} \\
+& \propto p(\theta, y \mid x) \\
+\end{aligned}
+$$ -->
+
+
+<p>So, $p(y \mid x)$ acts like a normalising contant here. Dividing by it does not change the inherent shape of the function, just brings the area under the curve to $1$ so that we can call it probability.</p>
+<p>Then, $p(\theta, y \mid x)$ is the joint distribution here since initially we were given $x$ and, $\theta$ and $y$ were not given. So we take joint of not given over given variables.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Posterior-=-Prior-*-Likelihood">Posterior = Prior * Likelihood<a class="anchor-link" href="#Posterior-=-Prior-*-Likelihood"> </a></h2><p>This is a very frequently used equality whenever Bayesian approaches are involved. Now that we know what the individual terms are, we can verify (if) it is true using simpler building block Bayes rule</p>
+$$
+\begin{aligned}
+p(\theta, y \mid x) &amp;= \frac{p(\theta, x, y)}{p(x)} \\
+&amp;= p(\theta)  \frac{p(\theta, x, y)}{p(\theta) \text{ } p(x)} \\
+&amp;= p(\theta) \text{ } p(y \mid \theta, x) \frac{p(\theta, x)}{p(\theta) \text{ } p(x)} \\
+&amp;= p(\theta) \text{ } p(y \mid \theta, x) \tag{$\theta$ and $x$ assumed independent}\\
+\end{aligned}
+$$<p>Therefore, the equality is true only when $p(\theta, x) = p(\theta) \text{ } p(x)$, that is, $x$ and $\theta$ are independent. It may sound intuitive that the input data $x$ has nothing to do with the parameters of the model $\theta$ before the model training begins. However, writing the above steps just makes it explicit.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Predicting-a-new-point-$x^{\star}$,-given-x,-y">Predicting a new point $x^{\star}$, given x, y<a class="anchor-link" href="#Predicting-a-new-point-$x^{\star}$,-given-x,-y"> </a></h2><p>Let the prediction for the new point $x^{\star}$ be $y^{\star}$, therefore, we want to find the distribution $p(y^{\star} \mid x^{\star}, x, y)$.</p>
+<p>Marginalizing over posterior $p(\theta \mid x, y)$,
+$$
+\begin{aligned}
+p(y^{\star} \mid x^{\star}, x, y) &amp;= \int p(y^{\star} \mid x^{\star}, \theta) \text{ } p(\theta \mid x, y) d\theta \\
+\end{aligned}
+$$</p>
+<blockquote><p>I find it easier to quickly use it as a kind of chain rule. In $p(\theta \mid x, y)$, $x$ and $y$ were given to us and we found out $\theta$. Next, we use this $\theta$ and the remaining $x^{\star}$ in the given side of the $\mid$ (bar), thus we can write $p(y^{\star} \mid x^{\star}, \theta)$.</p>
+</blockquote>
+<p>When marginalizing over posterior $p(\theta \mid x, y)$, we are going over (weighted average) all the models (combination of paramters $\theta$) for given $x$ and $y$. We are using these models as priors for $x^{\star}$ and $y^{\star}$ to find their likelihood $p(y^{\star} \mid x^{\star}, \theta)$</p>
+<p>Here we assume that $(x^{\star}, y^{\star})$ are from the same distribution as $(x, y)$ because we have covered only those models that were derived from $(x, y)$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is an alternative way to do the same thing, however it gives clearer idea about the assumptions we make.</p>
+<!-- $$
+\begin{aligned}
+p(\theta, y \mid x) &= \frac{p(\theta, x, y)}{p(x)} \\
+&= p(\theta)  \frac{p(\theta, x, y)}{p(\theta) \text{ } p(x)} \\
+&= p(\theta) \text{ } p(y \mid \theta, x) \frac{p(\theta, x)}{p(\theta) \text{ } p(x)} \\
+&= p(\theta) \text{ } p(y \mid \theta, x) \tag{$\theta$ and $x$ assumed independent}\\
+\end{aligned}
+$$ -->
+
+
+$$
+\begin{aligned}
+p(y^{\star} \mid x^{\star}, x, y) &amp;= \int p(y^{\star}, \theta \mid x^{\star}, x, y) d\theta \tag{Marginalizing over $\theta$}\\
+&amp;= \int p(y^{\star} \mid x^{\star}, x, y, \theta)p(\theta \mid x^{\star}, x, y) d\theta \tag{$p(A \mid B, C) \text{ } p(B \mid C) = p(A, B \mid C)$}\\
+&amp;= \int \frac{p(y^{\star}, x, y \mid x^{\star}, \theta)}{p(x, y)}  \frac{p(\theta, x^{\star} \mid x, y)}{p(x^{\star})} d\theta \\
+&amp;= \int \left[\frac{p(x, y \mid x^{\star}, y^{\star}, \theta)}{p(x, y)} \frac{p(x^{\star} \mid \theta, x, y)}{p(x^{\star})}\right] \cdot \left[p(y^{\star} \mid x^{\star}, \theta) p(\theta \mid x, y)\right] d\theta \\ 
+\end{aligned}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Therefore, this would be equal to the original result when the first big bracket is $1$. Thus $p(x, y \mid x^{\star}, y^{\star}, \theta) = p(x, y)$ and $p(x^{\star} \mid \theta, x, y) = p(x^{\star})$ must be true. Intuitively it means that $(x^{\star}, y^{\star})$ come from the same distribution as $(x, y)$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/blog/2022/04/03/Bayesian.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/aayushagrawal135" target="_blank" title="aayushagrawal135"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/feeler_21" target="_blank" title="feeler_21"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
